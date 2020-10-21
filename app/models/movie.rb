@@ -8,7 +8,6 @@ class Movie < ActiveRecord::Base
 #       puts 'ratings_list is something other than nil or an array'
 #     end
 #   end
-  
 #   def self.all_ratings
 #     return ['G','PG','PG-13','R']
 #   end
