@@ -18,10 +18,10 @@ class MoviesController < ApplicationController
     @release_date_class = ''
     if params.key?('order')
       @movies = @movies.order(params['order'])
-      if params['order'] = 'title'
-        @title_class = 'hilite p-3 mb-2 bg-warning text-dark'
-      elsif params['order'] = 'release_date'
+      if params['order'] = 'release_date'
         @release_date_class = 'hilite p-3 mb-2 bg-warning text-dark'
+      elsif params['order'] = 'title'
+        @title_class = 'hilite p-3 mb-2 bg-warning text-dark'
       end
     end
     @all_ratings = Movie.all_ratings
