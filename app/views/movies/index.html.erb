@@ -19,9 +19,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th>Movie Title</th>
+      <th><%= link_to 'Movie Title', movies_path({'order': 'title', 'ratings': Hash[@ratings_to_show.collect {|item| [item, '']} ]}), id: 'title_header', class: 'hilite p-3 mb-2 bg-warning text-dark' %></th>
       <th>Rating</th>
-      <th>Release Date</th>
+      <th><%= link_to 'Release Date', movies_path({'order': 'release_date', 'ratings': Hash[@ratings_to_show.collect {|item| [item, '']} ]}), id: 'release_date_header', class: 'hilite p-3 mb-2 bg-warning text-dark' %></th>
       <th>More Info</th>
     </tr>
   </thead>
