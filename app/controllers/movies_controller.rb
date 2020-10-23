@@ -7,20 +7,35 @@ class MoviesController < ApplicationController
   end
 
   def index
-#     @movies = Movie.all
     if params[:ratings].nil?
-      @ratings_to_show = []
+      if params.key?('commit')
+        @ratings_to_show = []
+        session[:ratings] = nil
+      elsif session[:ratings].nil?
+        @ratings_to_show = []
+      else
+        @ratings_to_show = session[:ratings].keys
+      end
     else
       @ratings_to_show = params[:ratings].keys
+      session[:ratings] = params[:ratings]
     end
     @movies = Movie.with_ratings(@ratings_to_show)
     @title_class = ''
     @release_date_class = ''
     if params.key?('order')
       @movies = @movies.order(params['order'])
+      session['order'] = params['order']
       if params['order'] == 'release_date'
         @release_date_class = 'hilite p-3 mb-2 bg-warning text-dark'
       elsif params['order'] == 'title'
+        @title_class = 'hilite p-3 mb-2 bg-warning text-dark'
+      end
+    elsif session.key?('order')
+      @movies = @movies.order(session['order'])
+      if session['order'] == 'release_date'
+        @release_date_class = 'hilite p-3 mb-2 bg-warning text-dark'
+      elsif session['order'] == 'title'
         @title_class = 'hilite p-3 mb-2 bg-warning text-dark'
       end
     end
